@@ -1,0 +1,270 @@
+
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Sora:wght@300;400;600&display=swap');
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:'Sora',sans-serif;background:transparent}
+  .wrap{padding:2rem 1.5rem;max-width:780px;margin:0 auto}
+  .hero{text-align:center;margin-bottom:2.5rem}
+  .hero h1{font-size:2rem;font-weight:600;color:var(--color-text-primary);line-height:1.2;margin-bottom:.5rem}
+  .hero p{font-size:.95rem;color:var(--color-text-secondary);font-weight:300}
+  .badge{display:inline-flex;align-items:center;gap:6px;background:var(--color-background-success);color:var(--color-text-success);font-size:.75rem;font-weight:500;padding:4px 12px;border-radius:100px;margin-bottom:1rem}
+  .dot{width:6px;height:6px;border-radius:50%;background:currentColor}
+  .card{background:var(--color-background-primary);border:0.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-lg);padding:1.5rem;margin-bottom:1.25rem}
+  .section-label{font-size:.8rem;font-weight:500;color:var(--color-text-secondary);text-transform:uppercase;letter-spacing:.06em;margin-bottom:.75rem}
+  .form-row{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:1rem}
+  .form-group{display:flex;flex-direction:column;gap:.4rem}
+  .form-group label{font-size:.82rem;color:var(--color-text-secondary)}
+  select,input[type=text]{width:100%;padding:.55rem .75rem;border:0.5px solid var(--color-border-secondary);border-radius:var(--border-radius-md);background:var(--color-background-secondary);color:var(--color-text-primary);font-family:'Sora',sans-serif;font-size:.88rem;outline:none}
+  select:focus,input[type=text]:focus{border-color:var(--color-border-primary);background:var(--color-background-primary)}
+  .checkbox-row{display:flex;flex-wrap:wrap;gap:.6rem;margin-top:.25rem}
+  .chip{display:flex;align-items:center;gap:6px;padding:.35rem .7rem;border:0.5px solid var(--color-border-tertiary);border-radius:100px;cursor:pointer;font-size:.8rem;color:var(--color-text-secondary);background:var(--color-background-secondary);transition:all .15s}
+  .chip:hover{border-color:var(--color-border-primary);color:var(--color-text-primary)}
+  .chip.active{background:var(--color-background-info);border-color:var(--color-border-info);color:var(--color-text-info)}
+  .chip input{display:none}
+  .gen-btn{width:100%;padding:.75rem;background:var(--color-text-primary);color:var(--color-background-primary);border:none;border-radius:var(--border-radius-md);font-family:'Sora',sans-serif;font-size:.95rem;font-weight:500;cursor:pointer;transition:opacity .15s;margin-top:.5rem}
+  .gen-btn:hover{opacity:.85}
+  .gen-btn:active{transform:scale(.99)}
+  .key-box{background:var(--color-background-secondary);border:0.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-md);padding:1rem 1.25rem;display:flex;align-items:center;gap:.75rem;margin-bottom:1rem;font-family:'JetBrains Mono',monospace;font-size:.82rem;word-break:break-all}
+  .key-text{flex:1;color:var(--color-text-primary);line-height:1.6}
+  .copy-btn{flex-shrink:0;padding:.4rem .8rem;border:0.5px solid var(--color-border-secondary);border-radius:var(--border-radius-md);background:transparent;color:var(--color-text-secondary);font-family:'Sora',sans-serif;font-size:.78rem;cursor:pointer;transition:all .15s;white-space:nowrap}
+  .copy-btn:hover{background:var(--color-background-secondary);color:var(--color-text-primary)}
+  .copy-btn.copied{background:var(--color-background-success);color:var(--color-text-success);border-color:var(--color-border-success)}
+  .keys-list{display:flex;flex-direction:column;gap:.5rem}
+  .key-item{background:var(--color-background-secondary);border:0.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-md);padding:.75rem 1rem;display:flex;align-items:center;gap:.75rem}
+  .key-item .key-label{font-size:.75rem;color:var(--color-text-secondary);min-width:80px}
+  .key-item .key-val{flex:1;font-family:'JetBrains Mono',monospace;font-size:.78rem;color:var(--color-text-primary);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  .key-item .key-type{font-size:.7rem;padding:2px 8px;border-radius:100px;background:var(--color-background-info);color:var(--color-text-info)}
+  .del-btn{padding:.25rem .5rem;border:none;background:transparent;color:var(--color-text-tertiary);cursor:pointer;font-size:.9rem;border-radius:var(--border-radius-md)}
+  .del-btn:hover{background:var(--color-background-danger);color:var(--color-text-danger)}
+  .empty{text-align:center;color:var(--color-text-tertiary);font-size:.85rem;padding:1.5rem;font-style:italic}
+  .stats{display:grid;grid-template-columns:repeat(3,1fr);gap:.75rem;margin-bottom:1.5rem}
+  .stat{background:var(--color-background-secondary);border-radius:var(--border-radius-md);padding:.75rem 1rem;text-align:center}
+  .stat-n{font-size:1.4rem;font-weight:600;color:var(--color-text-primary)}
+  .stat-l{font-size:.72rem;color:var(--color-text-secondary);margin-top:2px}
+  .tab-row{display:flex;gap:.5rem;margin-bottom:1.25rem}
+  .tab{padding:.4rem .9rem;border:0.5px solid var(--color-border-tertiary);border-radius:100px;font-size:.82rem;cursor:pointer;background:transparent;color:var(--color-text-secondary);font-family:'Sora',sans-serif;transition:all .15s}
+  .tab.active{background:var(--color-text-primary);color:var(--color-background-primary);border-color:var(--color-text-primary)}
+  .tab-content{display:none}
+  .tab-content.active{display:block}
+  .info-row{display:flex;align-items:center;justify-content:space-between;padding:.5rem 0;border-bottom:0.5px solid var(--color-border-tertiary);font-size:.85rem}
+  .info-row:last-child{border-bottom:none}
+  .info-row .lbl{color:var(--color-text-secondary)}
+  .info-row .val{color:var(--color-text-primary);font-weight:500}
+  .success-msg{background:var(--color-background-success);color:var(--color-text-success);border:0.5px solid var(--color-border-success);border-radius:var(--border-radius-md);padding:.6rem 1rem;font-size:.83rem;margin-bottom:.75rem;display:none}
+</style>
+
+<div class="wrap">
+  <div class="hero">
+    <div class="badge"><span class="dot"></span> Bepul va cheksiz</div>
+    <h1>API Key Generator</h1>
+    <p>Loyihangiz uchun xavfsiz API kalitlarini bir zumda yarating</p>
+  </div>
+
+  <div class="stats">
+    <div class="stat"><div class="stat-n" id="total-count">0</div><div class="stat-l">Jami kalitlar</div></div>
+    <div class="stat"><div class="stat-n" id="active-count">0</div><div class="stat-l">Faol</div></div>
+    <div class="stat"><div class="stat-n" id="type-count">0</div><div class="stat-l">API turlari</div></div>
+  </div>
+
+  <div class="tab-row">
+    <button class="tab active" onclick="switchTab('generate')">Yaratish</button>
+    <button class="tab" onclick="switchTab('keys')">Mening kalitlarim</button>
+    <button class="tab" onclick="switchTab('docs')">Qo'llanma</button>
+  </div>
+
+  <div id="tab-generate" class="tab-content active">
+    <div class="card">
+      <div class="section-label">Asosiy sozlamalar</div>
+      <div class="form-row">
+        <div class="form-group">
+          <label>Kalit nomi</label>
+          <input type="text" id="key-name" placeholder="Masalan: my-app-prod" />
+        </div>
+        <div class="form-group">
+          <label>API turi</label>
+          <select id="key-type">
+            <option value="sk">Secret key (sk-...)</option>
+            <option value="pk">Public key (pk-...)</option>
+            <option value="ak">Access key (ak-...)</option>
+            <option value="tok">Token (tok-...)</option>
+            <option value="custom">Custom prefix</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label>Uzunlik</label>
+          <select id="key-length">
+            <option value="32">32 belgi</option>
+            <option value="48" selected>48 belgi</option>
+            <option value="64">64 belgi</option>
+            <option value="128">128 belgi</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Format</label>
+          <select id="key-format">
+            <option value="alphanum">Harf + raqam</option>
+            <option value="hex">Hexadecimal</option>
+            <option value="base64">Base64 URL</option>
+            <option value="uuid">UUID format</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-group" id="custom-prefix-group" style="display:none;margin-bottom:1rem">
+        <label>Custom prefix</label>
+        <input type="text" id="custom-prefix" placeholder="myapp" maxlength="10"/>
+      </div>
+      <div class="section-label" style="margin-top:.5rem">Ruxsatlar (ixtiyoriy)</div>
+      <div class="checkbox-row" id="perms-row">
+        <label class="chip active"><input type="checkbox" checked value="read"> Read</label>
+        <label class="chip"><input type="checkbox" value="write"> Write</label>
+        <label class="chip"><input type="checkbox" value="delete"> Delete</label>
+        <label class="chip"><input type="checkbox" value="admin"> Admin</label>
+        <label class="chip"><input type="checkbox" value="webhook"> Webhook</label>
+        <label class="chip"><input type="checkbox" value="stream"> Stream</label>
+      </div>
+      <button class="gen-btn" onclick="generateKey()">Kalit yaratish</button>
+    </div>
+
+    <div id="result-area" style="display:none">
+      <div class="success-msg" id="succ-msg">Kalit muvaffaqiyatli yaratildi!</div>
+      <div class="card">
+        <div class="section-label">Yaratilgan kalit</div>
+        <div class="key-box">
+          <div class="key-text" id="generated-key"></div>
+          <button class="copy-btn" id="copy-main" onclick="copyKey()">Nusxa</button>
+        </div>
+        <div style="font-size:.78rem;color:var(--color-text-secondary);line-height:1.6">
+          Ushbu kalitni xavfsiz joyda saqlang. Sahifani yangilaganda bu kalit ko'rinmay qolishi mumkin.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="tab-keys" class="tab-content">
+    <div class="card">
+      <div class="section-label">Saqlangan kalitlar</div>
+      <div id="keys-container"><div class="empty">Hali hech qanday kalit yaratilmagan</div></div>
+    </div>
+  </div>
+
+  <div id="tab-docs" class="tab-content">
+    <div class="card">
+      <div class="section-label">Foydalanish namunasi</div>
+      <div class="info-row"><span class="lbl">Authorization header</span><span class="val" style="font-family:'JetBrains Mono',monospace;font-size:.78rem">Bearer &lt;YOUR_API_KEY&gt;</span></div>
+      <div class="info-row"><span class="lbl">Query param</span><span class="val" style="font-family:'JetBrains Mono',monospace;font-size:.78rem">?api_key=&lt;YOUR_API_KEY&gt;</span></div>
+      <div class="info-row"><span class="lbl">Xavfsizlik</span><span class="val">HTTPS orqali yuboring</span></div>
+      <div class="info-row"><span class="lbl">Amal qilish muddati</span><span class="val">Cheksiz (revoke qilguncha)</span></div>
+      <div class="info-row"><span class="lbl">Rate limit</span><span class="val">Cheklanmagan</span></div>
+    </div>
+    <div class="card">
+      <div class="section-label">Kod misoli — JavaScript</div>
+      <div style="background:var(--color-background-secondary);border-radius:var(--border-radius-md);padding:1rem;font-family:'JetBrains Mono',monospace;font-size:.75rem;line-height:1.8;color:var(--color-text-primary)">
+        const res = await fetch('/api/data', {<br>
+        &nbsp;&nbsp;headers: {<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;'Authorization': 'Bearer YOUR_KEY',<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;'Content-Type': 'application/json'<br>
+        &nbsp;&nbsp;}<br>
+        });
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+let keys = [];
+
+document.getElementById('key-type').addEventListener('change', function(){
+  document.getElementById('custom-prefix-group').style.display = this.value === 'custom' ? 'block' : 'none';
+});
+
+document.querySelectorAll('.chip').forEach(chip => {
+  chip.addEventListener('click', () => chip.classList.toggle('active'));
+});
+
+function switchTab(name){
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
+  event.target.classList.add('active');
+  document.getElementById('tab-' + name).classList.add('active');
+  if(name === 'keys') renderKeys();
+}
+
+function randomStr(len, chars){
+  let r = '';
+  for(let i=0;i<len;i++) r += chars[Math.floor(Math.random()*chars.length)];
+  return r;
+}
+
+function generateKey(){
+  const type = document.getElementById('key-type').value;
+  const len = parseInt(document.getElementById('key-length').value);
+  const fmt = document.getElementById('key-format').value;
+  const name = document.getElementById('key-name').value.trim() || 'my-key-' + Date.now();
+  const customPfx = document.getElementById('custom-prefix').value.trim() || 'key';
+
+  let pfx = {sk:'sk',pk:'pk',ak:'ak',tok:'tok',custom:customPfx}[type];
+  let body = '';
+
+  if(fmt === 'alphanum'){
+    body = randomStr(len, 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789');
+  } else if(fmt === 'hex'){
+    body = randomStr(len, '0123456789abcdef');
+  } else if(fmt === 'base64'){
+    body = randomStr(len, 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-_');
+  } else if(fmt === 'uuid'){
+    body = 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, c => {
+      const r = Math.random()*16|0;
+      return (c==='x' ? r : (r&0x3|0x8)).toString(16);
+    });
+  }
+
+  const perms = [...document.querySelectorAll('.chip.active input')].map(i=>i.value);
+  const fullKey = pfx + '-' + body;
+
+  document.getElementById('generated-key').textContent = fullKey;
+  document.getElementById('result-area').style.display = 'block';
+  const msg = document.getElementById('succ-msg');
+  msg.style.display = 'block';
+  setTimeout(()=> msg.style.display='none', 2000);
+
+  keys.unshift({id: Date.now(), name, key: fullKey, type: type.toUpperCase(), perms, date: new Date().toLocaleDateString('uz')});
+  updateStats();
+}
+
+function copyKey(){
+  const val = document.getElementById('generated-key').textContent;
+  navigator.clipboard.writeText(val).then(()=>{
+    const btn = document.getElementById('copy-main');
+    btn.textContent = 'Nusxalandi!';
+    btn.classList.add('copied');
+    setTimeout(()=>{btn.textContent='Nusxa';btn.classList.remove('copied')},1500);
+  });
+}
+
+function renderKeys(){
+  const c = document.getElementById('keys-container');
+  if(!keys.length){c.innerHTML='<div class="empty">Hali hech qanday kalit yaratilmagan</div>';return;}
+  c.innerHTML = keys.map(k=>`
+    <div class="key-item" id="ki-${k.id}">
+      <span class="key-type">${k.type}</span>
+      <span class="key-label">${k.name}</span>
+      <span class="key-val">${k.key}</span>
+      <button class="del-btn" onclick="deleteKey(${k.id})">✕</button>
+    </div>
+  `).join('');
+}
+
+function deleteKey(id){
+  keys = keys.filter(k=>k.id!==id);
+  renderKeys();
+  updateStats();
+}
+
+function updateStats(){
+  document.getElementById('total-count').textContent = keys.length;
+  document.getElementById('active-count').textContent = keys.length;
+  document.getElementById('type-count').textContent = [...new Set(keys.map(k=>k.type))].length;
+}
+</script>
